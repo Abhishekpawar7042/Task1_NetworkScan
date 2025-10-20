@@ -1,0 +1,124 @@
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-10-20 07:39 EDT
+Nmap scan report for 191.168.1.x
+Host is up (0.0037s latency).
+Not shown: 995 closed tcp ports (reset)
+PORT    STATE    SERVICE
+22/tcp  filtered ssh
+23/tcp  filtered telnet
+53/tcp  open     domain
+80/tcp  open     http
+443/tcp open     https
+MAC Address: 6C:4F:89:28:4A:08 (Unknown)
+
+Open Ports:
+-22/tcp  ssh
+   • Risk: Possible brute-force or unauthorized access if weak/default credentials are used.
+   • Severity: Medium
+   • Evidence: scan_result1.txt
+   • Mitigation: Disable password auth, use key-based login, restrict SSH to admin IPs via firewall, enable fail2ban.
+   
+-23/TCP – Telnet
+   .Risk: Unencrypted remote access; credentials can be intercepted; could allow unauthorized system control.
+   .Severity: High
+   .Evidence: scan_result1.txt
+   .Mitigation: Disable Telnet; use SSH (port 22) instead; restrict access via firewall; monitor for suspicious login attempts.
+   
+-53/udp  dns
+   • Risk: Open resolver can be used for amplification DDoS; misconfig may allow cache poisoning or AXFR.
+   • Severity: Medium - High
+   • Evidence: scan_result1.txt
+   • Mitigation: Disable recursion for external clients; restrict AXFR; rate-limit queries; firewall 53.
+
+-80/tcp  http
+   • Risk: Vulnerable web application could lead to data leak, defacement, or remote code execution.
+   • Severity: Medium
+   • Evidence: scan_result1.txt
+   • Mitigation: Remove default pages, update web applications, run web vulnerability scan, consider WAF.
+   • Notes: Version/details of web app not determined.
+
+-443/tcp https
+   • Risk: Misconfigured TLS or vulnerable web app might expose sensitive data or allow exploits.
+   • Severity: Medium
+   • Evidence: scan_result1.txt
+   • Mitigation: Ensure up-to-date TLS config, use HSTS, patch web apps, scan for vulnerabilities.
+  
+Nmap scan report for (192.168.1.x)
+Host is up (0.022s latency).
+All 1000 scanned ports on realme-C25Y (192.168.1.x) are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+MAC Address: EE:DC:48:82:4B:75 (Unknown)
+
+Nmap scan report for 192.168.1.x (192.168.1.x)
+Host is up (0.0087s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT      STATE SERVICE
+49152/tcp open  unknown
+62078/tcp open  iphone-sync
+MAC Address: A6:66:60:6B:F4:18 (Unknown)
+
+Open Ports:
+49152/TCP – Ephemeral Port (Windows Dynamic)
+.Risk: Generally used for outbound connections; if exposed externally, could be exploited for unauthorized access or session hijacking.
+.Severity: Medium
+.Evidence: scan_result1.txt
+.Mitigation: Block inbound traffic from untrusted networks; monitor for unusual connections; restrict ephemeral port range exposure via firewall.
+
+62078/TCP – Apple Device Services (iTunes/AppleSync)
+.Risk: Open port may allow information leakage or device sync abuse; could be used for targeted attacks on Apple devices.
+.Severity: Medium
+.Evidence: scan_result1.txt
+.Mitigation: Restrict to trusted local networks; firewall access control; disable service if not used.
+
+
+Nmap scan report for (192.168.1.x)
+Host is up (0.014s latency).
+All 1000 scanned ports on realme-10-Pro-5G (192.168.1.x) are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+MAC Address: DA:D9:40:80:71:EA (Unknown)
+
+Nmap scan report for (192.168.1.x)
+Host is up (0.030s latency).
+All 1000 scanned ports on Galaxy-F12 (192.168.1.x) are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+MAC Address: 3E:20:95:29:CA:10 (Unknown)
+
+Nmap scan report for (192.168.1.x)
+Host is up (0.00053s latency).
+Not shown: 996 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+902/tcp  open  iss-realsecure
+912/tcp  open  apex-mesh
+3306/tcp open  mysql
+5357/tcp open  wsdapi
+MAC Address: 2C:98:11:32:16:25 (Cloud Network Technology Singapore PTE.)
+
+902/TCP – VMware ESXi/VMware Server
+.Risk: Remote management access; misconfiguration could allow unauthorized VM control or information disclosure.
+.Severity: High
+.Evidence: scan_result1.txt
+.Mitigation: Restrict access to management VLAN; use VPN or jump host; enable strong authentication; firewall port 902.
+
+912/TCP – VMware Authentication Service (vSphere Client/VMware Tools)
+.Risk: Exposed port could allow information disclosure or authentication bypass if misconfigured.
+.Severity: Medium
+.Evidence: scan_result1.txt
+.Mitigation: Restrict access to trusted networks; monitor logs; disable if not needed.
+
+3306/TCP – MySQL Database
+.Risk: Open MySQL port may allow unauthorized database access, data leakage, SQL injection attempts.
+.Severity: High
+.Evidence: scan_result1.txt
+.Mitigation: Restrict access to trusted hosts; enforce strong passwords; disable remote root login; enable TLS; firewall port 3306.
+
+5357/TCP – Web Services for Devices (WSDAPI / Windows Printer Sharing)
+.Risk: Could leak printer or device info; potential DoS or exploitation in Windows environments.
+.Severity: Medium
+.Evidence: scan_result.txt
+.Mitigation: Disable WSD on unnecessary devices; restrict access via firewall; monitor network traffic.
+
+Nmap scan report for 192.168.1.x
+Host is up (0.0000070s latency).
+All 1000 scanned ports on 192.168.1.x are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+
+Nmap done: 256 IP addresses (7 hosts up) scanned in 45.38 seconds
